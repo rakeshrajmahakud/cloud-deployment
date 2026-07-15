@@ -10,7 +10,7 @@ jobs:  # A job is a collection of tasks that are run together
 
     steps:
       - name: checkout code
-        uses: actions@v6
+        uses: actions/checkout@v6
         # all these secrets are must be created in github repo settings --> secrets & variables --> actions --> new secret
       - name: deploy via ssh
         uses: appleboy/ssh-action@master #tis is action tool name which hep to run ssh 
