@@ -15,7 +15,7 @@ jobs:  # A job is a collection of tasks that are run together
     - name: deploy via ssh
       uses: appleboy/ssh-action@master #tis is action tool name which hep to run ssh 
       with:
-        host: ${{ secrets.SSH_HOST }} #add your ec2 machine static ip address
+        host: ${{ secrets.SSH_HOST }} # add your ec2 machine static ip address
         username: ${{ secrets.SSH_USER }} #in our case in anw cloud we use ubuntu so sour ssh user is "ubuntu"
         key: ${{ secrets.SSH_KEY }} # your .pem file daata
         script: 
