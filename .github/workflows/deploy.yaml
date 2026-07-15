@@ -1,0 +1,26 @@
+ name: deploy to ec2
+on:
+  push: # Triggers the workflow on push or pull request events but only for the main branch
+    branches: 
+      - main
+
+jobs:  # A job is a collection of tasks that are run together
+  deploy:
+    runs-on: ubuntu-latest
+
+  steps:
+    - name: checkout code
+      uses: actions@v6
+      # all these secrets are must be created in github repo settings --> secrets & variables --> actions --> new secret
+    - name: deploy via ssh
+      uses: appleboy/ssh-action@master #tis is action tool name which hep to run ssh 
+      with:
+        host: ${{ secrets.SSH_HOST }} #add your ec2 machine static ip address
+        username: ${{ secrets.SSH_USER }} #in our case in anw cloud we use ubuntu so sour ssh user is "ubuntu"
+        key: ${{ secrets.SSH_KEY }} # your .pem file daata
+        script: 
+          cd cloud-deployment  # this is the exact path to the repo on your ec2 machine where your all files are present (the project root folder)
+          git pull origin master
+          sudo docker compose down
+          sudo docker compose up -d --build
+
