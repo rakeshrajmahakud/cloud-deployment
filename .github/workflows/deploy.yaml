@@ -2,7 +2,7 @@ name: deploy to ec2
 on:
   push: # Triggers the workflow on push or pull request events but only for the main branch
     branches: 
-      - main
+      - master
 
 jobs:  # A job is a collection of tasks that are run together
   deploy:
@@ -24,5 +24,3 @@ jobs:  # A job is a collection of tasks that are run together
             git pull origin master
             sudo docker compose down
             sudo docker compose up -d --build
-            
-
